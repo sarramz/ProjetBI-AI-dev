@@ -1,10 +1,11 @@
-import Login from './screens/login/Login';
+
 import './App.css';
+import AuthPage from "./screens/auth/AuthPage";
 
 function App() {
   return (
     <div className="App">
-      <Login />
+       <AuthPage />
     </div>
   );
 }
