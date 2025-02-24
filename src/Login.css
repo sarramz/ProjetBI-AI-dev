@@ -1,0 +1,97 @@
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #1e3a8a;
+  }
+  
+  .login-box {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 350px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .login-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  
+  .form-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .forgot-password {
+    text-align: right;
+    font-size: 12px;
+  }
+  
+  .login-button {
+    width: 100%;
+    padding: 10px;
+    background: #1e40af;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .continue-text {
+    margin: 15px 0;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .social-button {
+    padding: 8px 15px;
+    border: 1px solid #ccc;
+    background: white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .register-text {
+    margin-top: 15px;
+    font-size: 14px;
+  }  
+
+  .social-buttons button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .social-buttons button:hover {
+    background: rgba(0, 0, 0, 0.1);
+  }  
