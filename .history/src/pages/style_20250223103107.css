@@ -1,0 +1,45 @@
+.not-found-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Décale tout à gauche */
+  padding: 50px;
+  height: 100vh;
+  gap: 50px; /* Espacement entre l'image et le texte */
+}
+
+.image-container {
+  flex: 1.5; /* Donne plus d'espace à l'image */
+  display: flex;
+  justify-content: flex-start; /* Décale l’image encore plus à gauche */
+}
+
+.image-container img {
+  width: 100%; /* Rend l'image plus grande */
+  max-width: 700px; /* Évite qu'elle ne devienne trop énorme */
+}
+
+.text-container {
+  flex: 1;
+  text-align: left;
+}
+
+.text-container h2 {
+  font-size: 48px; /* Plus grand pour être bien lisible */
+  color: #2c3e50;
+  white-space: nowrap; /* Force le texte sur une seule ligne */
+}
+
+.back-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: #3498db;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+.back-button:hover {
+  background-color: #2980b9;
+}

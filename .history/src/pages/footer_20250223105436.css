@@ -1,0 +1,30 @@
+/* Assure que toute la page prend la hauteur complète */
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Structure principale de l'application */
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* 100% de la hauteur de l'écran */
+  }
+  
+  /* Contenu principal, il prend tout l'espace disponible */
+  .main-content {
+    flex: 1;
+  }
+  
+  /* Footer bien en bas */
+  .footer {
+    width: 100%;
+    background-color: #0a0e1a;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+  }
+  

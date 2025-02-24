@@ -1,0 +1,56 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.not-found-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100vw;
+  height: 100vh;
+  padding: 5%; 
+  background-color: white; /* ✅ Fond blanc */
+  /* Fond léger pour un bon contraste */
+}
+
+.text-container {
+  flex: 1;
+  text-align: left;
+  padding-left: 5%;
+}
+
+.text-container h2 {
+  font-size: 64px; /* Plus grand pour bien remplir l'espace */
+  color: #2c3e50;
+  white-space: nowrap; /* Garde le texte sur une seule ligne */
+}
+
+.back-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 15px 30px;
+  background-color: #4A919E
+  ;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 20px;
+}
+
+.back-button:hover {
+  background-color: #2980b9;
+}
+
+.image-container {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end; /* Décale l’image à droite */
+  align-items: center;
+}
+
+.image-container img {
+  width: 90%; /* L’image prend plus de place */
+  max-width: 700px; /* Taille max pour éviter qu'elle dépasse trop */
+}
