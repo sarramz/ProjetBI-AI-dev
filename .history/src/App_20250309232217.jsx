@@ -18,7 +18,7 @@ const App = () => {
           <Route path='1' element={<footer/>} />
           <Route path='2' element={<ProfilePage/>} />
           <Route path='3' element={<CartPage/>} />
-          <Route path='4' element={<Product/>} />
+          <Route path='4' element={<roduct/>} />
         </Routes>
         <Footer /> {/* Ajout du footer */}
       </div>

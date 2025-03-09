@@ -3,8 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 import Footer from "./pages/footer.jsx"; // Import du footer
 import ProfilePage from "./pages/profilepage.jsx";
-import CartPage from "./pages/cartpage";
-import Product from "./pages/product.jsx";
+
 
 const Home = () => <h1 className="text-4xl text-center mt-10">Bienvenue sur la page d'accueil</h1>;
 
@@ -17,8 +16,7 @@ const App = () => {
           <Route path="*" element={<NotFoundPage />} />
           <Route path='1' element={<footer/>} />
           <Route path='2' element={<ProfilePage/>} />
-          <Route path='3' element={<CartPage/>} />
-          <Route path='4' element={<Product/>} />
+          <Route path='3' element={<cartPage/>} />
         </Routes>
         <Footer /> {/* Ajout du footer */}
       </div>

@@ -1,0 +1,153 @@
+.container {
+  width: 80%;
+  margin: auto;
+  font-family: Arial, sans-serif;
+}
+
+.product {
+  display: flex;
+  gap: 40px;
+  margin-top: 20px;
+}
+
+.product-images {
+  flex: 1;
+}
+
+.main-image {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.thumbnails {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.thumbnails img {
+  width: 60px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.product-details {
+  flex: 1;
+}
+
+.product-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.rating {
+  color: #ffcc00;
+  font-size: 16px;
+}
+
+.price {
+  font-size: 24px;
+  color: green;
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: red;
+}
+
+.colors {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.color {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+.green { background: rgb(255, 255, 255); }
+.blue { background: blue; }
+.black { background: black; }
+
+.sizes {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.size {
+  padding: 5px 15px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.size.active {
+  background: black;
+  color: white;
+}
+
+.quantity {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.quantity button {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  background: #f8f8f8;
+  cursor: pointer;
+}
+
+.add-to-cart {
+  margin-top: 10px;
+  background: black;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.related-products {
+  margin-top: 40px;
+}
+
+.products-list {
+  display: flex;
+  gap: 20px;
+}
+
+.product-card {
+  position: relative;
+  text-align: center;
+}
+
+.badge {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  background: red;
+  color: white;
+  padding: 3px 6px;
+  font-size: 12px;
+}
+
+.product-card img {
+  width: 150px;
+  border-radius: 10px;
+}
+
+.product-name {
+  font-size: 14px;
+}
+
+.price {
+  font-size: 16px;
+  font-weight: bold;
+}
