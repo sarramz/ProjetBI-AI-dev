@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 
+const slides = [
+  {
+    title: "Gaming PC",
+    subtitle: "RTX 4080",
+    discount: "70%",
+    image:
+      "https://www.jouleperformance.com/media/catalog/product/8/d/8d713093-984a-46fe-bd6c-3b18633b52d9.png?optimize=medium&fit=bounds&height=450&width=600&canvas=600:450",
+  },
+];
+
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-
-  const slides = [
-    {
-      title: "Gaming PC",
-      subtitle: "RTX 4080",
-      discount: "70%",
-      image:
-        "https://www.jouleperformance.com/media/catalog/product/8/d/8d713093-984a-46fe-bd6c-3b18633b52d9.png?optimize=medium&fit=bounds&height=450&width=600&canvas=600:450",
-    },
-  ];
 
   return (
     <div className="relative bg-black text-white">

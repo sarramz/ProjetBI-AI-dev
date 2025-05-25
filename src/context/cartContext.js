@@ -1,122 +1,62 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import {
-  getCartAPI,
-  addProductAPI,
-  removeProductAPI,
-  updateCartAPI,
-  clearCartAPI,
-} from "../services/cartService"; // adapte le chemin selon ton projet
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState(null); // Le panier complet avec id, produits, etc.
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [cartItems, setCartItems] = useState([]);
 
-  // Récupérer le panier au montage
+  // Charger depuis localStorage au démarrage
   useEffect(() => {
-    const fetchCart = async () => {
-      setLoading(true);
-      try {
-        const data = await getCartAPI();
-        setCart(data);
-      } catch (err) {
-        setError(err.detail || "Erreur chargement panier");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchCart();
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart) setCartItems(JSON.parse(savedCart));
   }, []);
 
-  // Ajouter un produit au panier
-  const addToCart = async (productId, quantity = 1) => {
-    if (!cart) {
-      setError("Panier non chargé");
-      return;
-    }
-    setLoading(true);
-    try {
-      const updatedCart = await addProductAPI(cart.id, productId, quantity);
-      setCart(updatedCart);
-    } catch (err) {
-      setError(err.detail || "Erreur ajout produit au panier");
-    } finally {
-      setLoading(false);
-    }
+  // Sauvegarder à chaque changement
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  const addToCart = (product, quantity = 1) => {
+    setCartItems((items) => {
+      const existingItem = items.find((item) => item.product.id === product.id);
+      if (existingItem) {
+        return items.map((item) =>
+          item.product.id === product.id
+            ? { ...item, quantity: item.quantity + quantity }
+            : item
+        );
+      } else {
+        return [...items, { product, quantity }];
+      }
+    });
   };
 
-  // Supprimer un produit
-  const removeFromCart = async (productId) => {
-    if (!cart) {
-      setError("Panier non chargé");
-      return;
-    }
-    setLoading(true);
-    try {
-      const updatedCart = await removeProductAPI(cart.id, productId);
-      setCart(updatedCart);
-    } catch (err) {
-      setError(err.detail || "Erreur suppression produit");
-    } finally {
-      setLoading(false);
-    }
+  const removeFromCart = (productId) => {
+    setCartItems((items) => items.filter((item) => item.product.id !== productId));
   };
 
-  // Mettre à jour la quantité d’un produit
-  const updateQuantity = async (productId, quantity) => {
-    if (!cart) {
-      setError("Panier non chargé");
-      return;
-    }
-    if (quantity < 1) return; // Ignore quantité invalide
-    setLoading(true);
-    try {
-      // On crée la liste mise à jour des produits côté front
-      const updatedProducts = cart.products.map((item) =>
-        item.productId === productId ? { ...item, quantity } : item
-      );
-      const updatedCart = await updateCartAPI(cart.id, updatedProducts);
-      setCart(updatedCart);
-    } catch (err) {
-      setError(err.detail || "Erreur mise à jour quantité");
-    } finally {
-      setLoading(false);
-    }
+  const updateQuantity = (productId, quantity) => {
+    if (quantity < 1) return;
+    setCartItems((items) =>
+      items.map((item) =>
+        item.product.id === productId ? { ...item, quantity } : item
+      )
+    );
   };
 
-  // Vider le panier
-  const clearCart = async () => {
-    if (!cart) {
-      setError("Panier non chargé");
-      return;
-    }
-    setLoading(true);
-    try {
-      await clearCartAPI(cart.id);
-      setCart({ ...cart, products: [], total_price: 0 });
-    } catch (err) {
-      setError(err.detail || "Erreur vidage panier");
-    } finally {
-      setLoading(false);
-    }
-  };
+  const clearCart = () => setCartItems([]);
 
-  // Calcul du nombre d’articles dans le panier
-  const cartItemsCount = cart
-    ? cart.products.reduce((acc, item) => acc + item.quantity, 0)
-    : 0;
+  const cartItemsCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
-  // Calcul du total du panier
-  const cartTotalPrice = cart ? cart.total_price : 0;
+  const cartTotalPrice = cartItems.reduce(
+    (acc, item) => acc + item.product.price * item.quantity,
+    0
+  );
 
   return (
     <CartContext.Provider
       value={{
-        cart,
-        loading,
-        error,
+        cartItems,
         addToCart,
         removeFromCart,
         updateQuantity,

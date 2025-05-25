@@ -5,10 +5,11 @@ import MainLayout from './layouts/mainLayout';
 import Home from './pages/home';
 import Signup from './pages/SignUp';
 import Login from './pages/Login';
-import ProductCatalogue from './pages/ProductCatalogue';  // Attention à la casse et au nom correct
-import Product from './pages/product';                  // Même chose ici
+import ProductCatalogue from './pages/ProductCatalogue';  // Vérifie le nom du fichier
+import ProductDetails from './pages/ProductDetails';    // Import du composant détail produit
 import NotFoundPage from './pages/NotFound';
 import AdminDashboard from './pages/AdminDashboard';
+import CartPage from "./pages/CartPage";
 
 function App() {
   return (
@@ -20,9 +21,10 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/contact" element={<ContactForm />} />
           <Route path="/products" element={<ProductCatalogue />} />
-          <Route path="/product/:id" element={<Product />} /> {/* Route dynamique */}
+          <Route path="/product/:id" element={<ProductDetails />} /> {/* Route dynamique pour détail */}
           <Route path="*" element={<NotFoundPage />} />
           <Route path="/admin" element={<AdminDashboard />} />
+          {/* Route pour le tableau de bord admin */} <Route path="/cart" element={<CartPage />} />       
         </Routes>
       </MainLayout>
     </Router>
