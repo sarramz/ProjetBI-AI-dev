@@ -1,64 +1,118 @@
-import React, { useState } from 'react';
+"use client"
 
-const HeroSection = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  
-  const slides = [
-    {
-      title: "Gaming PC",
-      subtitle: "RTX 4080",
-      discount: "70%",
-      image: "https://www.jouleperformance.com/media/catalog/product/8/d/8d713093-984a-46fe-bd6c-3b18633b52d9.png?optimize=medium&fit=bounds&height=450&width=600&canvas=600:450",
-    },
-  ];
+import { useState, useEffect } from "react"
+import  Button  from "../ui/button"
+import Badge from "../ui/badge"
+import { ChevronLeft, ChevronRight } from "lucide-react"
+
+const heroSlides = [
+  {
+    title: "iPhone 15 Pro Max",
+    subtitle: "Titanium. So strong. So light. So Pro.",
+    price: "$1,199",
+    originalPrice: "$1,299",
+    image: "/placeholder.svg?height=400&width=300",
+    gradient: "from-teal-600 to-teal-800",
+  },
+  {
+    title: "Samsung Galaxy S24 Ultra",
+    subtitle: "Galaxy AI is here. Epic in every way.",
+    price: "$1,099",
+    originalPrice: "$1,199",
+    image: "/placeholder.svg?height=400&width=300",
+    gradient: "from-teal-500 to-teal-700",
+  },
+  {
+    title: "Google Pixel 8 Pro",
+    subtitle: "The best of Google. Even more helpful.",
+    price: "$899",
+    originalPrice: "$999",
+    image: "/placeholder.svg?height=400&width=300",
+    gradient: "from-teal-700 to-teal-900",
+  },
+]
+
+export default function HeroSection() {
+  const [currentSlide, setCurrentSlide] = useState(0)
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length)
+    }, 5000)
+    return () => clearInterval(timer)
+  }, [])
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % heroSlides.length)
+  }
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)
+  }
+
+  const currentHero = heroSlides[currentSlide]
 
   return (
-    <div className="relative bg-navy-900 text-white">
-      {/* Hero Section */}
-      <div className="container mx-auto px-4 py-12 bg-black">
-        <div className="flex items-center justify-between">
-          {/* Left Content */}
-          <div className="space-y-4">
-            <h1 className="text-4xl font-bold">{slides[currentSlide].title}</h1>
-            <p className="text-2xl">{slides[currentSlide].subtitle}</p>
-          </div>
-
-          {/* Center Image */}
-          <div className="flex-1 flex justify-center">
-            <img 
-              src={slides[currentSlide].image || "/placeholder.svg"} 
-              alt="Gaming PC" 
-              className="w-96 h-auto"
-            />
-          </div>
-
-          {/* Right Content */}
-          <div className="text-right space-y-4">
-            <div className="text-6xl font-bold">
-              {slides[currentSlide].discount}
-              <span className="block text-3xl">SALES</span>
+    <section className="relative h-[600px] overflow-hidden">
+      <div className={`absolute inset-0 bg-gradient-to-r ${currentHero.gradient} transition-all duration-1000`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+          <div className="flex items-center justify-between h-full">
+            <div className="max-w-lg">
+              <h1 className="text-5xl font-bold mb-4 text-white">{currentHero.title}</h1>
+              <p className="text-xl mb-6 opacity-90">{currentHero.subtitle}</p>
+              <div className="flex items-center space-x-4 mb-8">
+                <span className="text-3xl font-bold text-white">{currentHero.price}</span>
+                <span className="text-lg line-through opacity-70 text-white">{currentHero.originalPrice}</span>
+                <Badge className="bg-red-500 ">Save $100</Badge>
+              </div>
+              <div className="flex space-x-4">
+               <button className="bg-black text-white p-3 rounded-lg  text-lg">Shop Now </button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-white  hover:bg-white hover:text-teal-700"
+                >
+                  Learn More
+                </Button>
+              </div>
             </div>
-            <button className="bg-white text-navy-900 px-6 py-2 rounded-full hover:bg-gray-100 transition-colors text-[#0B162C]">
-              Shop now
-            </button>
+            <div className="hidden lg:block">
+              <img
+                src={currentHero.image || "/placeholder.svg"}
+                alt={currentHero.title}
+                className="h-96 w-auto object-contain drop-shadow-2xl"
+              />
+            </div>
           </div>
-        </div>
-
-        {/* Slider Navigation Dots */}
-        <div className="flex justify-center gap-2 mt-8">
-          {slides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`w-2 h-2 rounded-full transition-all ${
-                currentSlide === index ? 'bg-white w-4' : 'bg-gray-400'
-              }`}
-            />
-          ))}
         </div>
       </div>
-    </div>
-  );
-};
 
-export default HeroSection;
+      <Button
+        variant="ghost"
+        size="icon"
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:bg-white/20"
+        onClick={prevSlide}
+      >
+        <ChevronLeft className="h-6 w-6" />
+      </Button>
+      <Button
+        variant="ghost"
+        size="icon"
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:bg-white/20"
+        onClick={nextSlide}
+      >
+        <ChevronRight className="h-6 w-6" />
+      </Button>
+
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        {heroSlides.map((_, index) => (
+          <button
+            key={index}
+            className={`w-3 h-3 rounded-full transition-all ${index === currentSlide ? "bg-white" : "bg-white/50"}`}
+            onClick={() => setCurrentSlide(index)}
+          />
+        ))}
+      </div>
+    </section>
+  )
+}
