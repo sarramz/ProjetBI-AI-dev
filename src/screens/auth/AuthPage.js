@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Auth.css";
-
+import { registerUser } from '../services/authService';
 const AuthPage = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -13,14 +13,25 @@ const AuthPage = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match!");
-      return;
-    }
-    console.log("User Data:", formData);
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (formData.password !== formData.confirmPassword) {
+    alert("Passwords do not match!");
+    return;
+  }
+
+  try {
+    await registerUser({
+      name: formData.name,
+      email: formData.email,
+      password: formData.password,
+    });
+    alert("Inscription réussie !");
+    // ici tu peux rediriger vers login ou autre
+  } catch (error) {
+    alert(error.detail || "Erreur lors de l'inscription");
+  }
+};
 
   return (
     <div className="auth-container">
